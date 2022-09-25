@@ -4,6 +4,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import PixabayApiService from './js/pixabay-service';
 import LoadMoreBtn from './js/component/load-more-btn';
 
+// Описаний в документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 //! Створи фронтенд частину застосунку пошуку і перегляду зображень за ключовим словом.
 //! Додай оформлення елементів інтерфейсу. Подивись демо-відео роботи застосунку.
 //
@@ -21,21 +26,20 @@ import LoadMoreBtn from './js/component/load-more-btn';
 //! orientation - орієнтація фотографії. Постав значення horizontal.
 //! safesearch - фільтр за віком. Постав значення true.
 //
-//? У відповіді буде масив зображень, що задовольнили критерії параметрів запиту.
-//? Кожне зображення описується об'єктом, з якого тобі цікаві тільки наступні властивості:
-
-//? webformatURL - посилання на маленьке зображення для списку карток.
-//? largeImageURL - посилання на велике зображення.
-//? tags - рядок з описом зображення. Підійде для атрибуту alt.
-//? likes - кількість лайків.
-//? views - кількість переглядів.
-//? comments - кількість коментарів.
-//? downloads - кількість завантажень.
-//
-//? Якщо бекенд повертає порожній масив, значить нічого підходящого не було знайдено.
-//? У такому разі показуй повідомлення з текстом:
-//? "Sorry, there are no images matching your search query. Please try again.".
-//? Для повідомлень використовуй бібліотеку notiflix.
+//! У відповіді буде масив зображень, що задовольнили критерії параметрів запиту.
+//! Кожне зображення описується об'єктом, з якого тобі цікаві тільки наступні властивості:!
+//! webformatURL - посилання на маленьке зображення для списку карток.
+//! largeImageURL - посилання на велике зображення.
+//! tags - рядок з описом зображення. Підійде для атрибуту alt.
+//! likes - кількість лайків.
+//! views - кількість переглядів.
+//! comments - кількість коментарів.
+//! downloads - кількість завантажень.
+//!
+//! Якщо бекенд повертає порожній масив, значить нічого підходящого не було знайдено.
+//! У такому разі показуй повідомлення з текстом:
+//! "Sorry, there are no images matching your search query. Please try again.".
+//! Для повідомлень використовуй бібліотеку notiflix.
 //
 
 const refs = {
@@ -138,3 +142,8 @@ function createGalleryMarkup(images) {
 function clearArticlesContainer() {
   refs.galleryCards.innerHTML = '';
 }
+
+var lightbox = new SimpleLightbox('.gallery a', {
+  /* options */
+});
+
