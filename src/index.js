@@ -5,9 +5,10 @@ import PixabayApiService from './js/pixabay-service';
 import LoadMoreBtn from './js/component/load-more-btn';
 
 // Описаний в документації
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import Notiflix from 'notiflix';
 
 //! Створи фронтенд частину застосунку пошуку і перегляду зображень за ключовим словом.
 //! Додай оформлення елементів інтерфейсу. Подивись демо-відео роботи застосунку.
@@ -66,7 +67,7 @@ function onSearch(event) {
 
   pixabayApiService.query = event.currentTarget.elements.query.value;
   clearArticlesContainer();
-  
+
   if (pixabayApiService.query === '') {
     Notify.info('Please, write something...');
   } else {
@@ -102,7 +103,7 @@ function createGalleryMarkup(images) {
       }) => {
         return `
     <div class="photo-card">
-      <a href="${webformatURL}">
+      <a href="${largeImageURL}">
         <img
           class="photo-card__img"
           src="${largeImageURL}" 
@@ -137,13 +138,14 @@ function createGalleryMarkup(images) {
     .join('');
 
   refs.galleryCards.insertAdjacentHTML('beforeend', markup);
+  gallery.refresh();
 }
 
 function clearArticlesContainer() {
   refs.galleryCards.innerHTML = '';
 }
 
-var lightbox = new SimpleLightbox('.gallery a', {
+var gallery = new SimpleLightbox('.gallery a', {
   /* options */
 });
 

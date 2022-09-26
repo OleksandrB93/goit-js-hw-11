@@ -14,7 +14,10 @@ export default class PixabayApiService {
 
     return fetch(url)
       .then(response => response.json())
-      .then(({hits}) => {
+      .then(({ hits, totalHits }) => {
+        if (!hits.length) {
+          return Notify.failure('Sorry. Please try again.');
+        }
         this.incrementPage();
 
         return hits;
